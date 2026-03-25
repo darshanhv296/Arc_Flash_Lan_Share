@@ -10,6 +10,93 @@ It enables seamless data transfer between devices connected to the same WiFi or 
 
 ---
 
+## 📁 Project Structure
+
+```text
+arc-flash-lan-share/
+│
+├── app/                          # Main Android application source code
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/com/example/filesharing/
+│   │   │   │   ├── MainActivity.kt           # Main UI entry point
+│   │   │   │   ├── FileSharingViewModel.kt  # Handles UI logic (MVVM)
+│   │   │   │   ├── TransferService.kt       # Background file transfer service
+│   │   │   │   ├── ProgressRequestBody.kt   # Tracks upload progress
+│   │   │   │   ├── WifiUtils.kt             # Network utilities (if used)
+│   │   │   │   └── ...other Kotlin files
+│   │   │   │
+│   │   │   ├── res/                         # UI resources and assets
+│   │   │   │   ├── layout/
+│   │   │   │   │   ├── activity_main.xml    # Main screen layout
+│   │   │   │   │   ├── activity_send.xml    # Send screen UI (optional)
+│   │   │   │   │   └── activity_receive.xml # Receive screen UI (optional)
+│   │   │   │   │
+│   │   │   │   ├── drawable/                # Icons and graphics
+│   │   │   │   ├── mipmap-*/                # App launcher icons (all densities)
+│   │   │   │   ├── values/                  # Colors, strings, styles
+│   │   │   │   └── xml/                     # Config XML files
+│   │   │   │
+│   │   │   └── AndroidManifest.xml          # App configuration (permissions, activities)
+│   │   │
+│   │   └── test/                           # Unit tests (optional)
+│   │
+│   ├── build.gradle.kts                    # App-level build configuration
+│   └── proguard-rules.pro                  # Code optimization rules (optional)
+│
+├── gradle/                                 # Gradle build system files
+│   └── wrapper/
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+│
+├── releases/                               # Final APK output directory
+│   └── app-release.apk                     # Installable Android APK file
+│
+├── assets/                                 # Project screenshots and UI previews
+│   ├── home.png                            # Home screen preview
+│   ├── send.png                            # Send screen preview
+│   ├── receive.png                         # Receive screen preview
+│   ├── connect.png                         # Connection screen (optional)
+│   └── transfer.png                        # Transfer progress UI
+│
+├── build.gradle.kts                        # Project-level build configuration
+├── settings.gradle.kts                     # Project settings
+├── gradle.properties                       # Gradle configuration properties
+├── gradlew                                 # Gradle wrapper (Linux/Mac)
+├── gradlew.bat                             # Gradle wrapper (Windows)
+├── .gitignore                              # Files ignored by Git
+├── README.md                               # Project documentation
+└── LICENSE                                 # License file (optional)
+```
+
+---
+
+## 📦 Where is the APK?
+
+The final installable APK is located in:
+
+```text
+releases/app-release.apk
+```
+
+👉 You can directly:
+
+* Install on Android device
+* Share for testing
+* Upload to GitHub Releases
+
+---
+
+## 🧠 Structure Explanation
+
+* `app/` → Core Android app (logic + UI)
+* `releases/` → Final APK build output
+* `assets/` → Screenshots for GitHub preview
+* `gradle/` → Build system files
+* Root files → Project configuration
+
+---
+
 ## 🎯 Key Highlights
 
 * ⚡ High-speed LAN transfer (no internet required)
