@@ -94,22 +94,6 @@ APK_Version/releases/app-release.apk
 ---
 
 ```
-
-```
-
-👉 This is your **final installable Android application**
-
----
-
-## 🧠 Structure Summary
-
-* `APK_Version/` → Root of your Android project
-* `app/` → Core source code + UI
-* `res/` → UI design (icons, layouts, themes)
-* `assets/` → Screenshots for GitHub display
-* `releases/` → Final APK file
-* `gradle/` → Build system
-
 ---
 
 ## 💡 Best Practices
@@ -129,7 +113,6 @@ APK_Version/releases/app-release.apk
 
 The final installable APK is located in:
 
-```text
 releases/app-release.apk
 ```
 
