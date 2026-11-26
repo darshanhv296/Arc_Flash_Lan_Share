@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arc Flash</title>
+  <link rel="icon" type="image/png" href="/brand-icon.png" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Top Header & Control Bar (Scan QR omitted for PC) -->
+    <header class="top-surface">
+      <div class="header-row">
+        <div class="brand-group">
+          <img class="brand-icon" src="/brand-icon.png" alt="Arc Flash" />
+          <h1 class="brand-title">Arc Flash</h1>
+          <span id="pairing-pill" class="pairing-pill unpaired">
+            <span class="pill-dot"></span>
+            <span id="pairing-pill-text">Not paired</span>
+          </span>
+        </div>
+        <button id="btn-settings" class="icon-btn" title="Settings" aria-label="Settings">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+            <path d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.03 7.03 0 0 0-1.63-.94l-.36-2.54a.49.49 0 0 0-.49-.42h-3.84a.49.49 0 0 0-.49.42l-.36 2.54c-.59.23-1.13.55-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.71 8.84a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32c.13.22.39.31.6.22l2.39-.96c.5.39 1.04.71 1.63.94l.36 2.54c.04.24.25.42.49.42h3.84c.24 0 .45-.18.49-.42l.36-2.54c.59-.23 1.13-.55 1.63-.94l2.39.96c.22.09.47 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2z"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="toolbar-divider"></div>
+
+      <!-- 5-icon control bar (Show QR, Refresh, Pause/Resume, Global Stop, Clear) -->
+      <nav class="toolbar-row" aria-label="Transfer controls">
+        <button id="btn-show-qr" class="icon-btn" title="Show my QR code" aria-label="Show my QR code">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+            <path d="M3 11h8V3H3v8zm2-6h4v4H5V5zm8-2v8h8V3h-8zm6 6h-4V5h4v4zM3 21h8v-8H3v8zm2-6h4v4H5v-4zm13 2h-2v2h2v2h-4v-4h2v-2h-2v-2h4v2h2v4zm2-4h-2v2h2v-2zm0 6h-2v2h2v-2z"/>
+          </svg>
+        </button>
+
+        <button id="btn-refresh" class="icon-btn" title="Refresh LAN devices" aria-label="Refresh LAN devices">
+          <svg id="refresh-icon" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+            <path d="M17.65 6.35A7.96 7.96 0 0 0 12 4a8 8 0 1 0 7.73 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+          </svg>
+        </button>
+
+        <button id="btn-pause-resume" class="icon-btn" title="Pause transfers" aria-label="Pause transfers" disabled>
+          <svg id="pause-icon" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+          </svg>
+          <svg id="resume-icon" class="hidden" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <button id="btn-stop-all" class="icon-btn danger" title="Stop transfers" aria-label="Stop transfers" disabled>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+            <path d="M6 6h12v12H6z"/>
+          </svg>
+        </button>
+
+        <button id="btn-clear" class="icon-btn" title="Clear transfers" aria-label="Clear transfers" disabled>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+          </svg>
+        </button>
+      </nav>
+
+      <!-- Send / Receive Tabs -->
+      <div class="tab-bar" role="tablist">
+        <button id="tab-btn-send" class="tab-btn active" role="tab" aria-selected="true">Send</button>
+        <button id="tab-btn-receive" class="tab-btn" role="tab" aria-selected="false">Receive</button>
+      </div>
+    </header>
+
+    <!-- LAN Connection Strip (Never exposes raw IP or port) -->
+    <section id="connection-strip" class="connection-strip" aria-label="LAN connection">
+      <div id="conn-paired-view" class="conn-row hidden">
+        <div class="conn-info">
+          <svg class="conn-ok-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+          <div>
+            <div id="connected-peer-name" class="conn-peer-title">Connected Device</div>
+            <div id="connected-via-label" class="conn-peer-sub">Connected · Wi-Fi / LAN</div>
+          </div>
+        </div>
+        <button id="btn-disconnect" class="text-btn">Disconnect</button>
+      </div>
+
+      <div id="conn-unpaired-view" class="conn-unpaired">
+        <div class="conn-status-line">
+          <svg class="conn-radar-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+            <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 0 0-6 0zm-4-4l2 2a7.074 7.074 0 0 1 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/>
+          </svg>
+          <span id="lan-status-text">Scanning Wi-Fi / LAN for nearby devices…</span>
+        </div>
+        <div id="peers-chips" class="peers-chips"></div>
+      </div>
+    </section>
+
+    <!-- Main Tab Panel -->
+    <main class="main-content">
+      <!-- ShareMe-style 6-Category Picker (Visible on Send Tab only) -->
+      <section id="send-categories-section" class="categories-wrap">
+        <div class="categories-grid">
+          <button class="cat-tile cat-files" data-cat="FILES" disabled>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+            </svg>
+            <span>Files</span>
+          </button>
+
+          <button class="cat-tile cat-folders" data-cat="FOLDERS" disabled>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+            </svg>
+            <span>Folders</span>
+          </button>
+        </div>
+
+        <div id="pair-required-hint" class="pair-hint">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+            <path d="M18 8h-1V6a5 5 0 0 0-10 0v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zm-6 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm3.1-9H8.9V6a3.1 3.1 0 0 1 6.2 0v2z"/>
+          </svg>
+          <span>Connect to a device above or let the phone scan your PC QR code to send</span>
+        </div>
+      </section>
+
+      <!-- Live Transfer Dashboard Table (Shared across Send & Receive) -->
+      <section class="dashboard-section" aria-label="Transfer dashboard">
+        <div class="dashboard-grid">
+          <div class="dash-cell">
+            <div class="dash-label">Files</div>
+            <div id="dash-files" class="dash-value">0 / 0</div>
+          </div>
+          <div class="dash-cell">
+            <div class="dash-label">Total Size</div>
+            <div id="dash-size" class="dash-value">0 B</div>
+          </div>
+          <div class="dash-cell">
+            <div class="dash-label">Speed</div>
+            <div id="dash-speed" class="dash-value accent">0 B/s</div>
+          </div>
+          <div class="dash-cell">
+            <div class="dash-label">Total Time</div>
+            <div id="dash-time" class="dash-value">00:00</div>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <span id="stats-text">Total: 0 | Active: 0 | Done: 0 | Failed: 0</span>
+          <span id="live-status" role="status" aria-live="polite">Connecting…</span>
+          <span id="tuning-badge" class="tuning-badge">AF01 · 4 MB buf · 32 MB win</span>
+        </div>
+
+        <div class="overall-progress-track">
+          <div id="overall-progress-fill" class="overall-progress-fill" style="width:0%"></div>
+        </div>
+
+        <div class="files-heading-row">
+          <h2 class="files-heading">Files</h2>
+          <span id="drop-hint" class="drop-hint">Drag &amp; drop files or folders here</span>
+        </div>
+      </section>
+
+      <!-- File List / Empty State -->
+      <section id="files-dropzone" class="files-list-wrap">
+        <div id="empty-state" class="empty-state">
+          <div id="empty-icon" class="empty-icon">⚡</div>
+          <div id="empty-title" class="empty-title">Ready for high-speed LAN transfer</div>
+          <div id="empty-subtitle" class="empty-subtitle">Connect to a LAN device above or show your QR code to start sending.</div>
+        </div>
+        <div id="files-list" class="files-list hidden"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Hidden Category File Inputs -->
+  <input id="input-files" type="file" multiple class="hidden" />
+  <input id="input-folders" type="file" webkitdirectory directory multiple class="hidden" />
+
+  <!-- Folder Mode Modal (Zip Folder vs Preserve Structure) -->
+  <div id="modal-folder-mode" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="folder-modal-title">
+    <div class="modal-card">
+      <h3 id="folder-modal-title" class="modal-title">Send Folder</h3>
+      <p class="modal-desc">Choose how you want to transfer your selected folder to the connected device.</p>
+      <div class="folder-mode-actions">
+        <button id="btn-folder-zip" class="primary-btn full-btn">Send Folder as ZIP Archive</button>
+        <button id="btn-folder-tree" class="outline-btn full-btn">Send Folder (Keep Subfolders)</button>
+        <button id="btn-folder-cancel" class="text-btn full-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Show QR Modal (Offline QR for Phone to Scan PC) -->
+  <div id="modal-qr" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="qr-modal-title">
+    <div class="modal-card center">
+      <div class="modal-top-bar">
+        <h3 id="qr-modal-title" class="modal-title">Pair Device</h3>
+        <button id="btn-qr-close" class="icon-btn small" aria-label="Close">✕</button>
+      </div>
+      <div id="qr-device-name" class="qr-device-name">Arc Flash PC</div>
+      <div class="qr-canvas-frame">
+        <canvas id="qr-canvas" width="220" height="220"></canvas>
+      </div>
+      <div id="qr-status-pill" class="qr-status-pill">Waiting for pairing…</div>
+      <div id="qr-countdown" class="qr-countdown">Expires in 01:00</div>
+      <button id="btn-qr-regen" class="primary-btn full-btn">Regenerate QR</button>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="modal-settings" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="settings-modal-title">
+    <div class="modal-card">
+      <div class="modal-top-bar">
+        <h3 id="settings-modal-title" class="modal-title">Settings</h3>
+        <button id="btn-settings-close" class="icon-btn small" aria-label="Close">✕</button>
+      </div>
+
+      <label class="field-label" for="input-device-name">Device Name</label>
+      <input id="input-device-name" class="text-input" type="text" maxlength="40" placeholder="My PC" />
+
+      <label class="field-label">Storage Location (Saved Files Folder)</label>
+      <div class="folder-picker-row">
+        <div id="save-dir-display" class="text-input folder-path" role="status"></div>
+        <button id="btn-pick-save-dir" class="outline-btn">Choose Folder</button>
+      </div>
+
+      <label class="field-label">Screen Theme</label>
+      <div class="theme-chips">
+        <button class="theme-chip" data-theme="system">System</button>
+        <button class="theme-chip" data-theme="light">Light</button>
+        <button class="theme-chip" data-theme="dark">Dark</button>
+      </div>
+
+      <div class="modal-actions-end">
+        <button id="btn-settings-save" class="primary-btn">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <script src="/qrcode.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
