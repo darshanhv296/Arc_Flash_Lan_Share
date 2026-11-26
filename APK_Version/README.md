@@ -1,433 +1,524 @@
-# ⚡ ARC FLASH – LAN File Sharing (Android APK)
+
+# ⚡ ARC FLASH — LAN File Sharing
+
+<p align="center">
+  <img src="PC_Version/static/brand-icon.png" alt="ARC FLASH logo" width="150">
+</p>
+
+<h3 align="center">Fast. Local. Direct.</h3>
+
+<p align="center">
+  High-speed file sharing between Android and Windows PCs over your local network.
+</p>
+
+<p align="center">
+  <a href="https://drive.google.com/drive/folders/1rBTvIBJs3fQL1FKlETxc2HRzwO1P19cW?usp=drive_link">DOWNLOAD ARC FLASH — APK & WINDOWS EXE</a>
+</p>
+
+---
 
 ## 🚀 Overview
 
-**ARC FLASH** is a high-performance **LAN-based file sharing Android application** designed for **ultra-fast, stable, and completely offline file transfer**.
+**ARC FLASH** is a local-network file-sharing system for Android and Windows PC, designed to transfer files directly between compatible devices connected to the same Wi-Fi network or mobile hotspot.
 
-It enables seamless data transfer between devices connected to the same WiFi or hotspot using a **secure, event-driven architecture**, eliminating common issues like duplicate uploads, unstable connections, and unauthorized access.
+The project includes an Android app and a PC companion. Devices discover compatible peers on the local network and establish a transfer session to send files and folders. ARC FLASH is designed to operate without cloud file hosting or a required internet connection when devices can communicate on the same LAN.
 
-> ⚡ Built for speed, privacy, and reliability in real-world usage.
+- ⚡ Direct LAN transfers
+- 📱 Android APK and 🖥️ Windows PC companion
+- 📡 Local device discovery
+- 🔗 QR-assisted connection workflow
+- 📁 File and folder transfer workflows
+- 📊 Transfer progress and speed monitoring
+- 🔄 Transfer controls
+- 📴 Local-network operation without cloud upload
+- 🎨 Interface theme options on Android and PC, where supported
+
+> **Download the ready-to-use applications:** Use the single download link at the top of this README to access the latest release containing the Android APK and Windows EXE.
 
 ---
 
-## 📁 Project Structure
+## 📥 Download ARC FLASH
+
+The latest Android APK and Windows executable are distributed through the project's GitHub Releases page.
+
+Use the **Download ARC FLASH** link at the top of this README to open the latest release.
+
+### Android
+
+1. Open the global download link at the top of this README.
+2. Download the Android APK from the release assets.
+3. Open the APK on your Android device and follow Android's installation prompts. You may need to allow installation from that source.
+4. Launch ARC FLASH and connect to the same Wi-Fi or hotspot as the other device.
+
+### Windows PC
+
+1. Open the global download link at the top of this README.
+2. Download the Windows executable from the release assets.
+3. Run the downloaded executable.
+4. If Windows Firewall asks, allow local network access only on networks you trust and intend to use for file sharing.
+5. Connect the PC and Android/other PC to the same local network.
+
+> If a release does not yet contain an APK or EXE asset, check back after the maintainer publishes the builds.
+
+---
+
+## ✨ Features
+
+### 📂 File and folder sharing
+
+- Transfer single files and multiple files.
+- Share folders using the supported folder-transfer workflows.
+- PC folder-transfer options include ZIP archive transfer and folder-tree transfer.
+- Folder-tree workflows are designed to preserve supported relative folder structure.
+
+### 📡 LAN device discovery
+
+ARC FLASH uses local-network discovery to help identify compatible devices. Discovery can be affected by router configuration, guest-network isolation, firewall rules, VPNs, and other network restrictions.
+
+### 🔗 QR-assisted connection
+
+QR workflows help simplify connection or pairing.
+
+On the PC version, the Show QR workflow generates a pairing payload for a compatible Android client. The Android version includes QR scan/connect and QR generation workflows.
+
+### 📊 Transfer dashboard
+
+The applications provide transfer status information, with supported views showing details such as:
+
+- File name
+- Transfer progress
+- Transfer status
+- Transfer speed
+- File size and related transfer information
+
+### 🔄 Transfer controls
+
+Controls available in the interface can include:
+
+- Pause and resume
+- Stop active transfer activity
+- Cancel an individual transfer
+- Retry a failed transfer, where available
+- Refresh discovery
+- Clear transfer entries/history
+
+The exact controls and availability depend on the platform and transfer state.
+
+### 🎨 Interface themes
+
+The Android README describes Dark, Light and Warm themes. The PC UI supports its available theme options, including system/light/dark selection as implemented.
+
+### 📴 Offline/local operation
+
+ARC FLASH is designed to send files directly over a local network. It does not require cloud file hosting for its intended LAN transfer workflow. Internet availability is not required when the local network provides device connectivity.
+
+---
+
+## 🔒 Privacy and connection model
+
+ARC FLASH is designed around local device-to-device communication and user-controlled transfers.
+
+- File transfers are intended to occur between compatible devices on the local network.
+- The application is not designed as a public cloud file-sharing service.
+- Devices use connection/session workflows before transfer, as supported by the implementation.
+- Received files are saved locally to the selected or configured destination.
+
+**Network safety:** Use ARC FLASH on networks you trust. Avoid exposing the application to the public internet or forwarding its ports through your router. Network discovery visibility is not a substitute for securing the local network.
+
+---
+
+## ⚡ Performance
+
+Transfer performance depends on the network band, signal strength, access point/router, interference, device hardware, storage speed, file sizes, and other activity on the network.
+
+ARC FLASH uses direct local-network communication and optimized transfer processing in its implementations. Actual throughput varies; no fixed speed is guaranteed.
+
+---
+
+# 📱 Android Version
+
+## Android highlights
+
+The Android application provides the mobile side of ARC FLASH:
+
+- LAN file sharing
+- Automatic device discovery
+- QR connection and QR generation workflows
+- Session-oriented connection/transfer workflow
+- File and folder sharing
+- Background transfer service
+- Real-time progress information
+- Duplicate-transfer prevention mechanisms as implemented
+- Dark, Light and Warm themes
+- Storage/location controls
+
+### Android installation
+
+1. Download the Android APK from the global download link at the top of this README.
+2. Install the APK on your Android device.
+3. Grant the required permissions when prompted.
+4. Connect to the same Wi-Fi or hotspot as the target device.
+5. Open ARC FLASH, discover/connect to the target device, and initiate a transfer.
+
+### Android project structure
+
+The Android project structure documented for the application is:
 
 ```text
-
-## 📁 Complete Project Structure
-
-
-arc-flash-lan-share/
-│
-├── APK_Version/                          # Main Android APK project
-│   │
-│   ├── app/                              # Android application source code
-│   │   ├── src/
-│   │   │   ├── main/
-│   │   │   │   ├── java/com/example/filesharing/
-│   │   │   │   │   ├── MainActivity.kt           # Main UI controller (entry point)
-│   │   │   │   │   ├── FileSharingViewModel.kt  # Handles UI logic (MVVM)
-│   │   │   │   │   ├── TransferService.kt       # Background file transfer service
-│   │   │   │   │   ├── ProgressRequestBody.kt   # Tracks upload progress
-│   │   │   │   │   └── ...other Kotlin files
-│   │   │   │   │
-│   │   │   │   ├── res/                         # UI resources and design assets
-│   │   │   │   │   ├── drawable/                # Icons, shapes, backgrounds
-│   │   │   │   │   ├── mipmap-anydpi-v26/       # Adaptive launcher icons
-│   │   │   │   │   ├── mipmap-mdpi/             # App icon (medium density)
-│   │   │   │   │   ├── mipmap-hdpi/             # App icon (high density)
-│   │   │   │   │   ├── mipmap-xhdpi/            # App icon (extra high density)
-│   │   │   │   │   ├── mipmap-xxhdpi/           # App icon (very high density)
-│   │   │   │   │   ├── mipmap-xxxhdpi/          # App icon (ultra high density)
-│   │   │   │   │   ├── values/                  # Colors, strings, themes, styles
-│   │   │   │   │   └── xml/                     # Config files (network, file paths)
-│   │   │   │   │
-│   │   │   │   └── AndroidManifest.xml          # App permissions & configuration
-│   │   │   │
-│   │   │   ├── build.gradle.kts                # App-level build configuration
-│   │   │   └── proguard-rules.pro              # Code optimization (optional)
-│   │
-│   ├── gradle/                                 # Gradle build system
+APK_Version/
+├── app/
+│   ├── src/
+│   │   └── main/
+│   │       ├── java/com/example/filesharing/
+│   │       │   ├── MainActivity.kt
+│   │       │   ├── FileSharingViewModel.kt
+│   │       │   ├── TransferService.kt
+│   │       │   ├── ProgressRequestBody.kt
+│   │       │   └── ...other Kotlin files
+│   │       ├── res/
+│   │       │   ├── drawable/
+│   │       │   ├── mipmap-anydpi-v26/
+│   │       │   ├── mipmap-mdpi/
+│   │       │   ├── mipmap-hdpi/
+│   │       │   ├── mipmap-xhdpi/
+│   │       │   ├── mipmap-xxhdpi/
+│   │       │   ├── mipmap-xxxhdpi/
+│   │       │   ├── values/
+│   │       │   └── xml/
+│   │       └── AndroidManifest.xml
+│   │       ├── build.gradle.kts
+│   │       └── proguard-rules.pro
+│   ├── gradle/
 │   │   └── wrapper/
-│   │       ├── gradle-wrapper.jar
-│   │       └── gradle-wrapper.properties
-│   │
-│   ├── releases/                               # Final build outputs
-│   │   └── app-release.apk                     # 📦 Installable APK file
-│   │
-│   ├── assets/                                 # 📸 Screenshots for documentation
-│   │   ├── home_screen.png                     # Main dashboard UI
-│   │   ├── qr_connect.png                      # QR connection screen
-│   │   ├── receive_screen.png                  # Receiving UI
-│   │   ├── send_screen_1.png                   # Sending UI (single file)
-│   │   ├── send_screen_2.png                   # Sending UI (multiple files)
-│   │   └── settings_screen.png                 # Settings panel UI
-│   │
-│   ├── build.gradle.kts                        # Project-level build configuration
-│   ├── settings.gradle.kts                     # Project settings
-│   ├── gradle.properties                       # Gradle configuration properties
-│   ├── gradlew                                 # Gradle wrapper (Linux/Mac)
-│   ├── gradlew.bat                             # Gradle wrapper (Windows)
-│   ├── .gitignore                              # Files ignored by Git
-│   ├── README.md                               # Project documentation
-│   └── LICENSE                                 # License file 
+│   ├── releases/
+│   │   └── app-release.apk
+│   ├── assets/
+│   │   ├── home_screen.png
+│   │   ├── qr_connect.png
+│   │   ├── receive_screen.png
+│   │   ├── send_screen_1.png
+│   │   ├── send_screen_2.png
+│   │   └── settings_screen.png
+│   ├── build.gradle.kts
+│   ├── settings.gradle.kts
+│   ├── gradle.properties
+│   ├── gradlew
+│   ├── gradlew.bat
+│   └── README.md
 ```
 
----
-## 📦 Where is the APK?
-
-The final installable APK is located in:
-
-releases/app-release.apk
+> The structure above describes the Android project layout documented for the app. The combined repository layout may differ depending on how the maintainer organizes the platform folders.
 
 ---
 
-## 🧠 Structure Summary
+# 🖥️ PC Version (Windows)
 
-* `app/` → Core Android code
-* `res/` → UI design & resources
-* `assets/` → Screenshots for GitHub
-* `releases/` → Final APK
-* `gradle/` → Build system
+## PC highlights
 
----
+ARC FLASH PC is the companion application for Windows, supporting compatible PC ↔ PC and Android ↔ PC LAN transfer workflows.
 
+- Python-based PC transfer service
+- Local desktop web interface
+- Desktop window via `pywebview` when available, with browser fallback
+- LAN discovery using UDP broadcast/listener
+- Optional mDNS discovery
+- QR-assisted pairing payload generation
+- AF01 binary transfer protocol
+- HTTP/1.1 and local interface service
+- File and folder transfer workflows
+- Folder-to-ZIP and folder-tree workflows
+- Transfer status and management
+- Configurable received-file destination
+
+## PC version requirements
+
+### Prebuilt executable
+
+- Windows compatible with the published release build
+- Local Wi-Fi, hotspot, or LAN connectivity
+- Windows Firewall permission for the intended trusted network, when needed
+
+### Run from source
+
+- Python 3.9 or newer
+- `zeroconf` is optional (for mDNS discovery)
+
+## Run the PC version from source
+
+### 1. Install Python
+
+Install Python 3.9 or newer and confirm it is available in PowerShell:
+
+```powershell
+python --version
 ```
 
+### 2. Download the source
+
+Download or clone the repository and open PowerShell in the PC source directory, where `app.py` is located.
+
+### 3. Optional mDNS package
+
+UDP discovery is built in. mDNS is optional:
+
+```powershell
+python -m pip install zeroconf
 ```
 
----
+### 4. Launch ARC FLASH PC
 
-
+```powershell
+python app.py
 ```
 
-👉 You can directly:
+The service starts and the UI opens. If the desktop WebView module is not available, the application falls back to the default browser.
 
-* Install on Android device
-* Share for testing
-* Upload to GitHub Releases
+## PC command-line options
 
----
+| Option | Description |
+|---|---|
+| `--port PORT` | Select the preferred TCP port (default: `53317`). |
+| `--save-dir PATH` | Choose the destination folder for received files. |
+| `--name NAME` | Set the display name advertised to nearby devices. |
+| `--no-ui` | Start the service without opening the interface. |
 
-## 🧠 Structure Explanation
+### Examples
 
-* `app/` → Core Android app (logic + UI)
-* `releases/` → Final APK build output
-* `assets/` → Screenshots for GitHub preview
-* `gradle/` → Build system files
-* Root files → Project configuration
+Default launch:
 
----
+```powershell
+python app.py
+```
 
-## 🎯 Key Highlights
+Custom device name:
 
-* ⚡ High-speed LAN transfer (no internet required)
-* 📡 Automatic device discovery
-* 🔐 Secure session-based communication
-* 🔒 Strong privacy protection (no public access)
-* 🔁 Zero duplicate transfers
-* 📊 Accurate real-time progress (0–100%)
-* 🔌 Event-driven system (no polling)
-* 🎨 Multiple UI themes (Dark, Light, Warm)
-* 📁 Full folder sharing support
-* 🔄 Background transfer support
+```powershell
+python app.py --name "My PC"
+```
 
----
+Custom receive directory:
 
-## 🔒 Privacy & Security (Detailed)
+```powershell
+python app.py --save-dir "D:\ARC-FLASH-Received"
+```
 
-ARC FLASH is built with a **privacy-first approach**, ensuring that file transfers are strictly controlled and visible only to intended devices.
+Preferred TCP port:
 
-### 🛡️ Private Connection Model
+```powershell
+python app.py --port 53317
+```
 
-* Devices must **authenticate before any transfer**
-* Only connected devices can communicate
-* No open broadcasting of files on the network
+Run without UI:
 
----
+```powershell
+python app.py --no-ui
+```
 
-### 🔐 Session-Based Authorization
+Combined:
 
-* Each connection uses a **unique session ID**
-* File transfer is allowed only after session validation
-* Prevents unauthorized access from other devices on the same network
+```powershell
+python app.py --name "Office PC" --save-dir "D:\Shared Files" --port 53317
+```
 
----
+When using `--no-ui`, stop the process with `Ctrl+C`.
 
-### 🚫 Network Isolation
+## PC configuration and storage
 
-Even if multiple users are on the same WiFi:
+The PC version creates or loads a local configuration for its device identity, display name, receive location and theme.
 
-* ❌ Other devices cannot see your files
-* ❌ No shared public file list
-* ✅ Transfers are strictly **device-to-device**
+- When running from source, configuration is stored in the source directory.
+- When running as a packaged executable, configuration is stored in the user's application-data directory.
+- The default receive folder is `C:\ARC-FLASH\ArcFlash`.
+- The receive location and supported settings can be changed through the UI.
 
----
+## PC network ports
 
-### 🔑 Controlled Sharing
+The PC version's documented protocol constants include:
 
-* Files are shared only when:
+| Purpose | Port |
+|---|---|
+| Preferred TCP transfer/UI service | `53317` |
+| UDP LAN discovery | `45890` |
+| TCP fallback | `53318` through `53327` may be attempted if the preferred port is unavailable |
 
-  * User selects device manually
-  * Connection is confirmed
-* No automatic or background sharing
+The TCP service supports the AF01 binary transfer protocol and HTTP-based interface/workflows.
 
----
+### Windows Firewall
 
-## ⚡ Performance & Speed
+If discovery or transfer fails:
 
-* 🚀 **20 MB/s – 80 MB/s** (based on network quality)
-* ⚡ Much faster than Bluetooth
-* ⚡ Equal or better than SHAREit in stable conditions
+1. Confirm the devices are on the same local network.
+2. Check the Windows network profile and use Private only for a trusted network.
+3. Allow ARC FLASH through Windows Firewall for that trusted network if required.
+4. Check for access-point isolation or guest-network restrictions.
+5. Consider whether a VPN is interfering with local network connectivity.
 
-### Performance Optimization:
-
-* Direct device communication
-* No cloud dependency
-* Lightweight protocol
-* Efficient data streaming
+Do not use router port forwarding to expose ARC FLASH to the internet.
 
 ---
 
-## ✨ Features (Detailed)
-
-### 📂 File & Folder Sharing
-
-* Transfer:
-
-  * Single files
-  * Multiple files
-  * 📁 Entire folders (recursive transfer)
-* Maintains folder structure
-* Suitable for large data transfers
-
----
-
-### 🔄 Background Transfer System
-
-* Transfer continues when:
-
-  * App is minimized
-  * User switches apps
-* Powered by background service
-* Prevents interruption
-
----
-
-### 🌐 Fully Offline Mode
-
-* No internet required
-* Works using:
-
-  * WiFi
-  * Mobile hotspot
-* No external server involved
-
----
-
-### 📊 Real-Time Transfer Dashboard
-
-Displays:
-
-* File size
-* Transfer speed (MB/s)
-* Progress percentage
-* Estimated time remaining
-
----
-
-### 🔁 Duplicate Prevention System
-
-* Each file assigned a **unique ID**
-* Prevents:
-
-  * Multiple uploads
-  * Repeated execution
-* Fixes common bugs like **300% progress issue**
-
----
-
-### 🔌 Event-Driven Communication
-
-* No repeated API calls
-* No polling loops
-* Uses controlled event triggers
-* Ensures:
-
-  * Stability
-  * Efficiency
-  * Predictability
-
----
-
-## 🎮 Top Control Panel (Detailed Explanation)
-
-The top toolbar provides **real-time control over transfer operations**, ensuring flexibility and user control.
-
-### ⏸️ Pause / Resume
-
-* Temporarily pauses active transfer
-* Preserves progress
-* Resume continues from last state
-* Useful during network instability
-
----
-
-### 📡 QR Scan (Instant Connect)
-
-* Scan QR to connect to another device
-* Eliminates manual setup
-* Faster and error-free connection
-
----
-
-### 📲 QR Generate (Share Device)
-
-* Generates a QR code for your device
-* Other devices can scan and connect instantly
-* Simplifies connection process
-
----
-
-### 🔄 Refresh (Network Scan)
-
-* Re-scans LAN for available devices
-* Updates device list dynamically
-* Useful when new devices join
-
----
-
-### ⚙️ Settings
-
-* Access customization options:
-
-  * Theme selection
-  * Storage location
-  * Network preferences
-
----
-
-### 🟥 Stop Transfer
-
-* Immediately stops active transfer
-* Cancels safely without corruption
-* Prevents unwanted transfers
-
----
-
-### 🗑️ Clear History
-
-* Removes transfer logs
-* Clears UI entries
-* Keeps interface clean
-
----
-
-## 🎨 Customization & UI
-
-### 🌗 Theme Modes
-
-#### 🌙 Dark Mode
-
-* Default mode
-* Low-light optimized
-* Premium look
-
-#### ☀️ Light Mode
-
-* Bright and clean
-* Ideal for daytime use
-
-#### 🔥 Warm Mode
-
-* Reduces blue light
-* Comfortable for long sessions
-* Unique eye-friendly feature
-
----
-
-### 📂 Storage Path Selection
-
-* Choose where files are saved
-* Supports custom directories
-* Helps manage large data efficiently
-
----
-
-## 🧠 Working Flow
+## 🔄 Typical connection workflow
 
 ```text
-Scan → Authenticate → Connect → Transfer → Complete
+Connect both devices to the same LAN/Wi-Fi/hotspot
+                      ↓
+             Open ARC FLASH apps
+                      ↓
+         Discover device or use QR workflow
+                      ↓
+               Connect / pair
+                      ↓
+             Select files or folder
+                      ↓
+             Transfer and monitor
+                      ↓
+                 Completed
 ```
 
 ---
 
-## ⚖️ Comparison with Other Apps
+## 🧰 Troubleshooting
 
-| Feature              | ARC FLASH      | SHAREit / Xender |
-| -------------------- | -------------- | ---------------- |
-| Privacy              | 🔒 Strong      | ⚠️ Weak          |
-| Ads                  | ❌ No           | ❌ Heavy          |
-| Speed                | ⚡ High         | ⚡ High           |
-| Folder Sharing       | ✅ Yes          | ✅ Yes            |
-| Background Transfer  | ✅ Yes          | ⚠️ Limited       |
-| Duplicate Protection | ✅ Yes          | ❌ No             |
-| Architecture         | ✅ Event-driven | ❌ Polling        |
+### Devices cannot find each other
+
+- Ensure both devices are on the same Wi-Fi, LAN or hotspot.
+- Check whether guest Wi-Fi or AP/client isolation blocks device communication.
+- Check firewall permissions on Windows.
+- Refresh the device discovery list or restart the apps.
+- Verify that local network connectivity is working.
+
+### QR connection fails
+
+- Ensure you are using a compatible ARC FLASH version.
+- Refresh or regenerate the QR code if the pairing payload has expired.
+- Check network connectivity and firewall rules.
+
+### Transfers are slow
+
+- Try a stronger Wi-Fi signal.
+- Use a less congested network.
+- Check device and disk performance.
+- Avoid simultaneous heavy network usage.
+- Test the devices on a different local network if necessary.
+
+### PC receives files in the wrong location
+
+- Open PC Settings and verify the receive destination.
+- Confirm that the drive exists and has sufficient free space.
+- Check local folder permissions.
+
+### PC application does not open its desktop window
+
+- The source version can use `pywebview` when installed.
+- If unavailable, the application can open the UI in the default browser.
+- Launch from PowerShell to see diagnostic messages.
+
+### PC application cannot start
+
+- Confirm Python 3.9+ for source execution.
+- Check the terminal output.
+- Try another preferred port using `--port`.
+- Check whether another instance is running.
 
 ---
 
-## 📦 Installation
+## 🧠 PC architecture and source files
 
-1. Download APK from `/releases`
-2. Install on Android device
-3. Grant permissions
-4. Connect to same WiFi/Hotspot
-5. Start sharing
+The PC implementation is organized around these source components:
+
+| File | Purpose |
+|---|---|
+| `app.py` | Application entry point, arguments, configuration and service/UI startup |
+| `arc_protocol.py` | AF01 framing, protocol constants, file metadata, control frames and helper logic |
+| `discovery.py` | UDP discovery, peer filtering and QR payload generation |
+| `transfer_engine.py` | Transfer manager, transfer processing, service/API, file sending and receiving |
+| `static/index.html` | Interface structure |
+| `static/styles.css` | Interface styling |
+| `static/app.js` | UI logic |
+| `static/qrcode.js` | QR rendering support |
+| `static/brand-icon.png` | Branding asset |
+
+## AF01 transfer protocol
+
+The PC implementation uses the AF01 binary transfer protocol, designed for compatibility with the Android counterpart.
+
+The protocol implementation includes:
+
+- AF01 session preface
+- Framed messages
+- File metadata and data frames
+- Acknowledgement and completion messages
+- Transfer control frames
+- Chunk processing
+- CRC32 integrity verification
+- Path confinement and safe destination handling
+- Transfer-management processing
+
+The implementation's tuning and transfer behavior are described in the source code; actual throughput depends on hardware and network conditions.
 
 ---
 
-## ⚠️ Requirements
+## 🗂️ Combined project layout
 
-* Android device
-* Same network
-* Storage permission enabled
+Example platform-separated layout for the repository:
+
+```text
+ARC-FLASH/
+├── APK_Version/
+│   └── Android project files...
+├── PC_Version/
+│   ├── app.py
+│   ├── arc_protocol.py
+│   ├── discovery.py
+│   ├── transfer_engine.py
+│   ├── requirements.txt
+│   └── static/
+│       ├── index.html
+│       ├── app.js
+│       ├── styles.css
+│       ├── qrcode.js
+│       └── brand-icon.png
+└── README.md
+```
+
+This is an illustrative organization for the repository; actual folder names can be adapted to the repository contents.
 
 ---
 
-## 🔮 Future Enhancements
+## 🆚 ARC FLASH and other sharing apps
 
-* 📁 Multi-file optimization
-* 🔐 Encryption support
-* 💻 PC client version
-* 🌐 Cross-platform support
+ARC FLASH focuses on direct local transfers, a lightweight interface, and user-controlled sharing. Feature comparisons with other applications depend on their versions, devices, settings and network conditions. This README does not claim universal speed or security superiority over other apps.
 
 ---
 
-## 📜 License
+## 🛠️ Future improvements
 
-This project is free for **personal and educational use**.
+Potential improvements and additions may include:
 
-* ❌ No subscriptions
-* ❌ No hidden costs
-* ❌ No ads
+- Further transfer throughput optimizations
+- More platform support
+- Expanded connection options
+- Additional transfer-management features
 
 ---
 
 ## 👤 Author
 
 **Darshan H V**
-ARC FLASH — LAN File Sharing System (v1.0)
 
-* 💡 Designed for performance and stability
-* ⚙️ Built with clean architecture
-* 🚀 Focused on real-world usability
+**ARC FLASH — LAN File Sharing**
+
+Built with a focus on local connectivity, performance, transfer visibility, and user control.
+
+---
+
+## 📜 License and usage
+
+Refer to the project's repository or release notes for the maintainer's current licensing and usage terms.
 
 ---
 
-## ⚡ Final Statement
-
-> ARC FLASH is a **fast, secure, and reliable file sharing system**
-> designed to provide **private, high-speed, and interruption-free transfers**
-> with complete user control and modern architecture.
-
----
+<p align="center">
+  <b>⚡ ARC FLASH</b><br>
+  Fast. Local. Direct.
+</p>
